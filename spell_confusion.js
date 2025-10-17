@@ -9,7 +9,7 @@ const rollDie = (sides) => {
   return Math.floor(Math.random() * sides) + 1;
 };
 
-const getSavingThrowContent = () => {
+const getSavingThrowContent = (pcName) => {
   const pcActor = game.actors.getName(pcName);
   
   const pcSpellSaveDc = pcActor.system.attributes.spell.dc;
@@ -52,7 +52,7 @@ const getMovementDirection = () => {
   }
 };
 
-const confusion = (forcedResult = 0) => {
+const confusion = (pcName, forcedResult = 0) => {
   let behaviour = `🚫✚ no bonus action <br>🚫⚡ no reaction<br>`;
   const behaviourDie = forcedResult === 0 ? rollDie(10) : forcedResult;
   if (behaviourDie === 1) {
@@ -67,7 +67,7 @@ const confusion = (forcedResult = 0) => {
     <br><i>No creature in range?</i> ↷ 🚫🗡️ <i>no action</i>`;
   else behaviour += "👍 The target chooses its behavior.";
 
-  const savingthrowResult = getSavingThrowContent();
+  const savingthrowResult = getSavingThrowContent(pcName);
   const { tokenName, pcSpellSaveDc, wisdomSaveRoll, wisdomSaveSuccess } =
     savingthrowResult;
 
@@ -88,4 +88,4 @@ ${behaviour}<br>
     content: content,
   });
 };
-confusion();
+confusion(pcName);
