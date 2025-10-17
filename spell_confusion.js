@@ -1,24 +1,25 @@
 const pcName = "PC_NAME_HERE";
 
 if (pcName === "" || !game.actors.getName(pcName))
-    return ui.notifications.warn(
-      "Enter a valid PC name at the top of the makro!"
-    );
+  return ui.notifications.warn(
+    "Enter a valid PC name at the top of the makro!"
+  );
+
+let token = canvas.tokens.controlled[0];
+if (!token)
+  return ui.notifications.warn(
+    "You must select a token to roll the saving throw for."
+  );
 
 const rollDie = (sides) => {
   return Math.floor(Math.random() * sides) + 1;
 };
 
-const getSavingThrowContent = (pcName) => {
+const getSavingThrowContent = (pcName, token) => {
   const pcActor = game.actors.getName(pcName);
-  
+
   const pcSpellSaveDc = pcActor.system.attributes.spell.dc;
 
-  let token = canvas.tokens.controlled[0];
-  if (!token)
-    return ui.notifications.warn(
-      "You must select a token to roll the saving throw for."
-    );
   const wisdomSaveMod = token.actor.system.abilities.wis.save.value;
   let wisdomSaveRoll = rollDie(20) + wisdomSaveMod;
   let wisdomSaveSuccess = wisdomSaveRoll >= pcSpellSaveDc;
@@ -67,7 +68,7 @@ const confusion = (pcName, forcedResult = 0) => {
     <br><i>No creature in range?</i> ↷ 🚫🗡️ <i>no action</i>`;
   else behaviour += "👍 The target chooses its behavior.";
 
-  const savingthrowResult = getSavingThrowContent(pcName);
+  const savingthrowResult = getSavingThrowContent(pcName, token);
   const { tokenName, pcSpellSaveDc, wisdomSaveRoll, wisdomSaveSuccess } =
     savingthrowResult;
 
@@ -88,4 +89,4 @@ ${behaviour}<br>
     content: content,
   });
 };
-confusion(pcName);
+confusion(pcName, token);
