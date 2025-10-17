@@ -1,9 +1,17 @@
+const pcName = "PC_NAME_HERE";
+
+if (pcName === "" || !game.actors.getName(pcName))
+    return ui.notifications.warn(
+      "Enter a valid PC name at the top of the makro!"
+    );
+
 const rollDie = (sides) => {
   return Math.floor(Math.random() * sides) + 1;
 };
 
 const getSavingThrowContent = () => {
-  const pcActor = game.actors.getName("Nix");
+  const pcActor = game.actors.getName(pcName);
+  
   const pcSpellSaveDc = pcActor.system.attributes.spell.dc;
 
   let token = canvas.tokens.controlled[0];
