@@ -53,7 +53,7 @@ const getMovementDirection = () => {
   }
 };
 
-const confusion = (pcName, forcedResult = 0) => {
+const confusion = (pcName, token, forcedResult = 0) => {
   let behaviour = `🚫✚ no bonus action <br>🚫⚡ no reaction<br>`;
   const behaviourDie = forcedResult === 0 ? rollDie(10) : forcedResult;
   if (behaviourDie === 1) {
