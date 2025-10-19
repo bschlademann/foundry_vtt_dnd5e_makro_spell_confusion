@@ -47,7 +47,7 @@ const getMovementDirection = () => {
  * @param {Token} token - The confused token
  * @param {number} [forcedResult=0] - Optional forced behavior roll (1-10)
  */
-const confusion = (pcName, token, forcedResult = 0) => {
+const confusion = (token, forcedResult = 0) => {
   let behaviour = `🚫✚ no bonus action <br>🚫⚡ no reaction<br>`;
   const behaviourDie = forcedResult === 0 ? rollDie(10) : forcedResult;
   
