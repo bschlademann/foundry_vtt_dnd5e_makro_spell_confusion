@@ -1,4 +1,4 @@
-const pcName = "Nix"; // Set the PC (caster) name
+const pcName = "CASTER_NAME_HERE"; // Set the PC (caster) name
 const pcActor = game.actors.getName(pcName);
 if (!pcActor) return ui.notifications.warn("Enter a valid PC name at the top of the macro!");
 
